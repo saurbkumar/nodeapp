@@ -1,10 +1,9 @@
 module.exports = {
   env: {
-    // browser: true,
     node: true,
     commonjs: true,
-    mocha: true
-    // es2021: true
+    mocha: true,
+    es2021: true
   },
   extends: ['eslint:recommended', 'prettier'],
   parserOptions: {
