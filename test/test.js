@@ -1,4 +1,4 @@
-const app = require('../app').app;
+const App = require('../app');
 const supertest = require('supertest');
 const shortId = require('../api/helpers/shortId');
 const logger = require('../logger');
@@ -10,12 +10,19 @@ const v1BasePath = config.App.v1Path;
 describe('HelloService', function () {
   let request;
   let port = Math.floor(Math.random() * 10000);
-  before(function () {
-    request = supertest.agent(app).host(`http://localhost:${port}`).set({
+  before(async function () {
+    request = supertest.agent(App.app).host(`http://localhost:${port}`).set({
       'X-Correlation-Id': shortId.generate(),
       'Content-Type': 'application/json'
     });
+    // initialize middle ware - DB connect
+    await App.start();
   });
+
+  after(async function () {
+    await App.stop();
+  });
+
   describe('GetHello', async function () {
     it('GetNameAndAge', async function () {
       const res = await request
