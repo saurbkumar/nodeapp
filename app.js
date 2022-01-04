@@ -7,7 +7,7 @@ const SwaggerParser = require('@apidevtools/swagger-parser');
 const OpenApiValidator = require('express-openapi-validator');
 
 const swaggerDocument = require('./api/swagger/swagger.json');
-const services = require('./api/service/services');
+const service = require('./api/services/syncService');
 
 const logger = require('./logger')(__filename);
 
@@ -16,8 +16,8 @@ const port = config.App.port;
 
 module.exports = {
   app: app,
-  start: services.start,
-  stop: services.stop
+  start: service.start,
+  stop: service.stop
 };
 app.use(cors());
 
@@ -121,6 +121,6 @@ if (require.main === module) {
   app.listen(port, async () => {
     logger.info(`Example app listening at http://localhost:${port}`);
     logger.info(`Starting background services`);
-    await services.start();
+    await service.start();
   });
 }

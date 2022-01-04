@@ -1,5 +1,5 @@
-const service = require('../service/service');
-const logger = console;
+const service = require('../services/service');
+const logger = require('../../logger')(__filename);
 module.exports = {
   getHello: getHello
 };
