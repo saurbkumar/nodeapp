@@ -12,7 +12,7 @@
   ],
   "paths": {
     "/hello": {
-      "x-controller": "helloController",
+      "x-controller": "controller",
       "get": {
         "summary": "Simple hello world",
         "operationId": "getHello",
